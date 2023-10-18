@@ -17,20 +17,20 @@ const port = process.env.PORT || 4000
 
 //middleware
 
-// const whitelist = [process.env.FRONT_END_URL, process.env.FRONT_END_URL_LOCALHOST]
+const whitelist = [process.env.FRONT_END_URL, process.env.FRONT_END_URL_LOCALHOST]
 
 
-// const corsOptions = {
-//     origin: (origin, callback) => {
-//         console.log(origin)
-//         if (whitelist.includes(origin)) {
-//             callback(null, true)
-//         } else {
-//             callback(new Error('Not allowed by CORS'))
-//         }
-//     }
-// }
-// app.use(cors(corsOptions))
+const corsOptions = {
+    origin: (origin, callback) => {
+        console.log(origin)
+        if (whitelist.includes(origin)) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use('/api', userRoutes);
 
